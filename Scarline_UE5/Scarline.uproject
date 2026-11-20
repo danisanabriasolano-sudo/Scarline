@@ -1,0 +1,14 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Games",
+  "Description": "Scarline Contact Racing - Unreal Engine 5 native foundation",
+  "Modules": [{ "Name": "Scarline", "Type": "Runtime", "LoadingPhase": "Default" }],
+  "Plugins": [
+    { "Name": "EnhancedInput", "Enabled": true },
+    { "Name": "ChaosVehiclesPlugin", "Enabled": true },
+    { "Name": "Interchange", "Enabled": true },
+    { "Name": "InterchangeEditor", "Enabled": true },
+    { "Name": "Niagara", "Enabled": true }
+  ]
+}

@@ -1,0 +1,32 @@
+# Unreal Engine 5
+Scarline_UE5/Binaries/
+Scarline_UE5/Intermediate/
+Scarline_UE5/Saved/
+Scarline_UE5/DerivedDataCache/
+Scarline_UE5/.vs/
+Scarline_UE5/**/.vs/
+
+# Archives (regenerar o descargar por separado)
+*.zip
+
+# Launcher compilado (rebuild con Build-ScarlineExe.ps1)
+prototype/desktop/Scarline.exe
+prototype/desktop/dist/Scarline.exe
+
+# Runtime local
+.scarline-port
+
+# Duplicado accidental de assets en dist
+prototype/desktop/dist/playtest/assets/assets/
+
+# Secretos / entorno
+.env
+.env.*
+*.pfx
+**/credentials*.json
+
+# OS / IDE
+Thumbs.db
+.DS_Store
+*.user
+*.suo
