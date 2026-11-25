@@ -9,6 +9,7 @@
     { "Name": "ChaosVehiclesPlugin", "Enabled": true },
     { "Name": "Interchange", "Enabled": true },
     { "Name": "InterchangeEditor", "Enabled": true },
-    { "Name": "Niagara", "Enabled": true }
+    { "Name": "Niagara", "Enabled": true },
+    { "Name": "PythonScriptPlugin", "Enabled": true }
   ]
 }

@@ -6,7 +6,8 @@ public class ScarlineEditorTarget : TargetRules
     {
         Type = TargetType.Editor;
         DefaultBuildSettings = BuildSettingsVersion.V5;
-        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
+        bOverrideBuildEnvironment = true;
         ExtraModuleNames.Add("Scarline");
     }
 }

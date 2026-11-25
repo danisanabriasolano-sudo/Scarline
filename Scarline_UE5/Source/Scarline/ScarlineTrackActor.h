@@ -21,9 +21,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Materials") TObjectPtr<UMaterialInterface> KerbMaterial;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Materials") TObjectPtr<UMaterialInterface> BarrierMaterial;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Road", meta=(ClampMin="10.0")) float RoadThickness = 28.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Road", meta=(ClampMin="4", ClampMax="40")) int32 SegmentsPerSpan = 16;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Road", meta=(ClampMin="4", ClampMax="40")) int32 SegmentsPerSpan = 22;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Details") bool bBuildSafetyBarriers = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Details") bool bBuildKerbs = true;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Details") bool bBuildCenterLine = true;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Materials") TObjectPtr<UMaterialInterface> CenterLineMaterial;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Details") float BarrierOffset = 850.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Track|Details") float BarrierHeight = 115.f;
     UFUNCTION(CallInEditor, Category="Track") void RebuildTrack();

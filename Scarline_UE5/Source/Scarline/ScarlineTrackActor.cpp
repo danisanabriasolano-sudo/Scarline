@@ -11,7 +11,7 @@ AScarlineTrackActor::AScarlineTrackActor()
     Route = CreateDefaultSubobject<USplineComponent>(TEXT("TrackRoute"));
     RootComponent = Route;
     Route->SetClosedLoop(true);
-    Route->SetDrawDebug(true);
+    Route->SetDrawDebug(false);
 }
 
 void AScarlineTrackActor::OnConstruction(const FTransform& Transform)
@@ -87,14 +87,21 @@ void AScarlineTrackActor::BuildSplineStrip(float LateralOffset, float Width, flo
             const FVector T1 = Route->GetTangentAtDistanceAlongSpline(B, ESplineCoordinateSpace::Local);
             const FVector R0 = FVector::CrossProduct(FVector::UpVector, T0.GetSafeNormal()).GetSafeNormal();
             const FVector R1 = FVector::CrossProduct(FVector::UpVector, T1.GetSafeNormal()).GetSafeNormal();
+            const float SeamOverlap = 14.f;
+            const FVector Dir0 = T0.GetSafeNormal();
+            const FVector Dir1 = T1.GetSafeNormal();
+            const FVector Start = P0 + R0 * LateralOffset + FVector(0, 0, ZOffset) - Dir0 * (Segment > 0 ? SeamOverlap * 0.5f : 0.f);
+            const FVector End = P1 + R1 * LateralOffset + FVector(0, 0, ZOffset) + Dir1 * SeamOverlap;
             USplineMeshComponent* Mesh = NewObject<USplineMeshComponent>(this);
             Mesh->SetMobility(EComponentMobility::Movable);
             Mesh->SetStaticMesh(Cube);
             if (Material) Mesh->SetMaterial(0, Material);
             Mesh->SetForwardAxis(ESplineMeshAxis::X, false);
-            Mesh->SetStartAndEnd(P0 + R0 * LateralOffset + FVector(0,0,ZOffset), T0, P1 + R1 * LateralOffset + FVector(0,0,ZOffset), T1, true);
-            Mesh->SetStartScale(FVector2D(Width / 100.f, Height / 100.f));
-            Mesh->SetEndScale(FVector2D(Width / 100.f, Height / 100.f));
+            Mesh->SetStartAndEnd(Start, T0, End, T1, true);
+            const float ScaleW = (Width / 100.f) * 1.012f;
+            const float ScaleH = Height / 100.f;
+            Mesh->SetStartScale(FVector2D(ScaleW, ScaleH));
+            Mesh->SetEndScale(FVector2D(ScaleW, ScaleH));
             Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
             Mesh->SetCollisionProfileName(TEXT("BlockAll"));
             Mesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
@@ -109,6 +116,10 @@ void AScarlineTrackActor::RebuildTrack()
     ClearGenerated();
     if (!Route || Route->GetNumberOfSplinePoints() < 4) return;
     BuildSplineStrip(0.f, RoadWidth, RoadThickness, -RoadThickness * 0.5f, RoadMaterial);
+    if (bBuildCenterLine && CenterLineMaterial)
+    {
+        BuildSplineStrip(0.f, 38.f, 6.f, RoadThickness * 0.25f, CenterLineMaterial);
+    }
     if (bBuildKerbs)
     {
         BuildSplineStrip(-(RoadWidth * 0.5f + 45.f), 90.f, 14.f, 2.f, KerbMaterial);

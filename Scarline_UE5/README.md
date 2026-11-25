@@ -1,5 +1,7 @@
 # SCARLINE — Unreal Engine 5 native project foundation
 
+**Versión principal:** ejecuta `Jugar-Scarline-Nativo.bat` en la raíz del repo (UE5). El playtest web en `prototype/` es solo referencia legacy.
+
 Scarline is being moved from the browser prototype to a native Unreal Engine project. This delivery is a substantially expanded **source foundation** for the next playable vertical slice. It is not a finished AAA game, packaged console build, or a claim of PS5-level visuals out of the box.
 
 ## Engine and build requirements

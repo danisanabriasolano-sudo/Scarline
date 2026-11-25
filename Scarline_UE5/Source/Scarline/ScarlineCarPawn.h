@@ -72,4 +72,6 @@ private:
     UFUNCTION() void OnVehicleHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
     void DetachPart(UStaticMeshComponent* Part, FName PartName, const FVector& HitLocation, const FVector& Impulse);
     void UpdateDamageMaterials();
+    void TryApplyHeroVehicleMesh();
+    void SetPlaceholderPartsVisible(bool bVisible);
 };
